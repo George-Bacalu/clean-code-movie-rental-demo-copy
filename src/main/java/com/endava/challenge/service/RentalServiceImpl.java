@@ -9,6 +9,8 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.endava.challenge.constants.Constants.CUSTOMER_NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
@@ -19,7 +21,9 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public String getRentalInfoTextVersion(String customerName) {
         Optional<Customer> customer = customerRepository.findByName(customerName);
-        if (customer.isEmpty()) throw new ResourceNotFoundException(String.format("There is no customer named %s", customerName));
+        if (customer.isEmpty()) {
+            throw new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND, customerName));
+        }
         StringBuilder result = new StringBuilder();
         result.append("Rental Record for ")
               .append(customer.get().getName())
@@ -40,7 +44,9 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public String getRentalInfoHtmlVersion(String customerName) {
         Optional<Customer> customer = customerRepository.findByName(customerName);
-        if (customer.isEmpty()) throw new ResourceNotFoundException(String.format("There is no customer named %s", customerName));
+        if (customer.isEmpty()) {
+            throw new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND, customerName));
+        }
         StringBuilder result = new StringBuilder();
         String baseLine = """
               <!DOCTYPE html>

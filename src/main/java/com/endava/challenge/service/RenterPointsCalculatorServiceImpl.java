@@ -10,6 +10,8 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.endava.challenge.constants.Constants.CUSTOMER_NOT_FOUND;
+
 @RequiredArgsConstructor
 @Service
 public class RenterPointsCalculatorServiceImpl implements RenterPointsCalculatorService {
@@ -18,7 +20,9 @@ public class RenterPointsCalculatorServiceImpl implements RenterPointsCalculator
     @Override
     public Optional<Integer> getTotalFrequentRenterPoints(String customerName) {
         Optional<Customer> customer = customerRepository.findByName(customerName);
-        if (customer.isEmpty()) throw new ResourceNotFoundException(String.format("There is no customer named %s", customerName));
+        if (customer.isEmpty()) {
+            throw new ResourceNotFoundException(String.format(CUSTOMER_NOT_FOUND, customerName));
+        }
         List<Rental> rentals = customer.get().getRentals();
         int frequentRenterPoints = 0;
         for (Rental rental : rentals) {
