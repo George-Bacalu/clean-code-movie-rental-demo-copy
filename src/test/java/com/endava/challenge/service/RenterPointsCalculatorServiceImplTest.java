@@ -22,7 +22,7 @@ class RenterPointsCalculatorServiceImplTest {
     }
 
     @Test
-    void getTotalFrequentRenterPoints_withInvalidCustomerName_shouldReturnCustomerFrequentRenterPoints() {
+    void getTotalFrequentRenterPoints_withInvalidCustomerName_shouldThrowException() {
         assertThatThrownBy(() -> renterPointsCalculatorService.getTotalFrequentRenterPoints("test_customer999"))
               .isInstanceOf(ResourceNotFoundException.class)
               .hasMessage(CUSTOMER_NOT_FOUND_TEST);

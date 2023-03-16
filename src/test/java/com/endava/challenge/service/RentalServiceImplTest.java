@@ -29,7 +29,7 @@ class RentalServiceImplTest {
     }
 
     @Test
-    void getRentalInfoTextVersion_withInvalidCustomer_shouldReturnCustomerRentalsInfoAsText() {
+    void getRentalInfoTextVersion_withInvalidCustomer_shouldThrowException() {
         assertThatThrownBy(() -> rentalService.getRentalInfoTextVersion("test_customer999"))
               .isInstanceOf(ResourceNotFoundException.class)
               .hasMessage(CUSTOMER_NOT_FOUND_TEST);
@@ -62,7 +62,7 @@ class RentalServiceImplTest {
     }
 
     @Test
-    void getRentalInfoHtmlVersion_withInvalidCustomer_shouldReturnCustomerRentalsInfoAsHtml() {
+    void getRentalInfoHtmlVersion_withInvalidCustomer_shouldThrowException() {
         assertThatThrownBy(() -> rentalService.getRentalInfoTextVersion("test_customer999"))
               .isInstanceOf(ResourceNotFoundException.class)
               .hasMessage(CUSTOMER_NOT_FOUND_TEST);

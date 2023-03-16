@@ -22,7 +22,7 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void getTotalAmount_withInvalidCustomerName_shouldReturnTotalAmountCustomerRentals() {
+    void getTotalAmount_withInvalidCustomerName_shouldThrowException() {
         assertThatThrownBy(() -> customerService.getTotalAmount("test_customer999"))
               .isInstanceOf(ResourceNotFoundException.class)
               .hasMessage(CUSTOMER_NOT_FOUND_TEST);
